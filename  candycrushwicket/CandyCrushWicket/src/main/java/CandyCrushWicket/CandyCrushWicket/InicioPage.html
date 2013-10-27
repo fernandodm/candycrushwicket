@@ -1,0 +1,29 @@
+<html
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd">
+<head>
+<title>Ingresar a Candy Crush</title>
+<link rel="stylesheet" type="text/css" href="css/cs_basic.css">
+</head>
+<body background="imagenes/fondoHome.jpg">
+	<img src="imagenes/candycrush.jpg">
+	<i><h2>Bienvenidos al Candy Crush</h2></i>
+	<i>El gran juego para organizar tus niveles</i>
+	<br></br>
+	
+	 <form wicket:id="nombreUser">
+            <table width="30%">
+                <tr>
+                    <td align="right">Ingrese su nombre:</td>
+                    <td align="left">
+                        <input wicket:id="nombreUsuario" type="text"/>
+                    </td>
+                </tr>
+                </table>
+                
+            <input type="submit" wicket:id="login" value="Ingresar" class="colorBoton"/>
+        </form>
+	
+</body>
+</html>
+
+
