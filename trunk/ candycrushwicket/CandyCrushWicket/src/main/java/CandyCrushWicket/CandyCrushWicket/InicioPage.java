@@ -22,7 +22,7 @@ public class InicioPage extends WebPage {
 	public InicioPage() {
 	
 		this.mundoApp = new MundoAppModel();
-		Form<MundoAppModel> loginForm = new Form<MundoAppModel>("nombreUser", new CompoundPropertyModel<MundoAppModel>(this.mundoApp));
+		Form<MundoAppModel> loginForm = new Form<MundoAppModel>("mundoAppForm", new CompoundPropertyModel<MundoAppModel>(this.mundoApp));
 		this.agregarCampo(loginForm);
 		this.agregarAcciones(loginForm);
 		this.add(loginForm);
