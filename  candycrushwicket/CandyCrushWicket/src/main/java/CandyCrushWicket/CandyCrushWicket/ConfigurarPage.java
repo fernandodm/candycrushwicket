@@ -8,7 +8,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 
 import appModel.MundoAppModel;
 
-
+//steve gay
 public class ConfigurarPage extends WebPage{
 
 	private InicioPage mainPage;
