@@ -17,7 +17,25 @@
 	<div style="border-right: 1px solid #353232; width: 50%">
 		<i><h4 style="color: #00557F" wicket:id="nombre"></h4></i>
 		<h4>Crear nivel:</h4>
-		
+
+		<form wicket:id="mundoAppForm">
+			<table>
+				<tr>
+					<td align="right">Nombre:</td>
+					<td align="left"><input wicket:id="nivelEnConstruccion.nombre"
+						type="text" /></td>
+				</tr>
+
+				<tr>
+					<td align="right">Dificultad:</td>
+					<td align="left"><select
+						wicket:id="nivelEnConstruccion.dificultad">
+
+					</select></td>
+				</tr>
+			</table>
+		</form>
+
 	</div>
 
 </body>

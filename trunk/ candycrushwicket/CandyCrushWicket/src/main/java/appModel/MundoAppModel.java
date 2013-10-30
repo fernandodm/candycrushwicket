@@ -1,7 +1,11 @@
 package appModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.uqbar.commons.utils.Observable;
+
 
 import net.sf.oval.constraint.ValidateWithMethod;
 import Tp.CandyCrush.Dificultad;
@@ -10,13 +14,13 @@ import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 import Tp.CandyCrush.Tablero;
 
-public class MundoAppModel {
+@Observable
+public class MundoAppModel implements Serializable {
 	
 	private String nombreUsuario;
 	
 	private Mundo mundo = new Mundo();
 	private Nivel nivelEnConstruccion = new Nivel();
-	private Dificultad	 dificultad;
 	private List<Nivel> niveles;
 	private Objetivo objetivo;
 	
@@ -31,12 +35,6 @@ public class MundoAppModel {
 	}
 	public void setNivelEnConstruccion(Nivel nivelEnConstruccion) {
 		this.nivelEnConstruccion = nivelEnConstruccion;
-	}
-	public Dificultad getDificultad() {
-		return dificultad;
-	}
-	public void setDificultad(Dificultad dificultad) {
-		this.dificultad = dificultad;
 	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
