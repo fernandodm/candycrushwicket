@@ -16,6 +16,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import Tp.CandyCrush.Dificultad;
 import Tp.CandyCrush.ExplosionesPorColor;
+import Tp.CandyCrush.GrandesExplosiones;
 import Tp.CandyCrush.Objetivo;
 import appModel.MundoAppModel;
 
@@ -52,16 +53,31 @@ public class ConfigurarPage extends WebPage{
 		parent.add(new Button("agregarExplosionesPorColor") {
 			@Override
 			public void onSubmit() {
-				ConfigurarPage.this.agregarExplosionesPorColor(new ExplosionesPorColor());
+				ConfigurarPage.this.agregarExplosionePorColor(new ExplosionesPorColor());
+			}
+
+		});
+		
+		parent.add(new Button("agregarGrandesExplosiones") {
+			@Override
+			public void onSubmit() {
+				ConfigurarPage.this.agregarGrandesExplosiones(new GrandesExplosiones());
 			}
 
 		});
 		
 	}
 
-	protected void agregarExplosionesPorColor(ExplosionesPorColor obj) {
-		
-		AgregarExplosionesPorColorPage agregar = new AgregarExplosionesPorColorPage(obj, this);
+	protected void agregarGrandesExplosiones(GrandesExplosiones obj) {
+
+		AgregarGrandesExplosionesPage agregar = new AgregarGrandesExplosionesPage(obj, this, this.mundoApp);
+		this.setResponsePage(agregar);
+	}
+
+	
+	protected void agregarExplosionePorColor(ExplosionesPorColor obj) {
+
+		AgregarExplosionesPorColorPage agregar = new AgregarExplosionesPorColorPage(obj, this, this.mundoApp);
 		this.setResponsePage(agregar);
 	}
 
@@ -74,6 +90,7 @@ public class ConfigurarPage extends WebPage{
 		parent.add(new TextField<String>("nivelEnConstruccion.puntajeMinimo"));
 	}
 
+	
 	protected ChoiceRenderer<Dificultad> createDificultadChoiceRenderer() {
 		return new ChoiceRenderer<Dificultad>() {
 			@Override
