@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://my.site.org">-->
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/cs_basic.css">
+</head>
+<body background="imagenes/fondoObjetivos.jpg">
+
+	<form wicket:id="objetivoForm">
+		<table>
+			<tr>
+				<td>Color</td>
+				<td align="left"><select wicket:id="color">
+
+				</select></td>
+			</tr>
+		</table>
+
+
+
+
+		<table>
+			<tr>
+				<td>Cantidad</td>
+				<td><wicket:child /></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td><input type="submit" wicket:id="agregar" value="Agregar"
+					class="colorBoton" /> <input type="submit" wicket:id="cancelar"
+					value="Cancelar" class="colorBoton" /></td>
+			</tr>
+
+		</table>
+	</form>
+
+</body>
+</html>

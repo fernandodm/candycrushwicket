@@ -29,7 +29,8 @@
 				<tr>
 					<td align="right">Dificultad:</td>
 					<td align="left"><select
-						wicket:id="nivelEnConstruccion.dificultad">
+						wicket:id="nivelEnConstruccion.dificultad"
+						name="mundoApp.nivelEnConstruccion.dificultad">
 
 					</select></td>
 				</tr>
@@ -80,7 +81,10 @@
 						<tr>
 							<div id="paging">
 								<input type="submit" wicket:id="agregarExplosionesPorColor"
-									value="Nuevo Explosiones por color" class="colorBoton" />
+									value="Nuevo Explosiones por color" class="colorBoton" /> 
+								<input
+									type="submit" wicket:id="agregarGrandesExplosiones"
+									value="Nuevo Grandes explosiones" class="colorBoton" />
 							</div>
 						</tr>
 					</tfoot>
