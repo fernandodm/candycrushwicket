@@ -37,7 +37,7 @@ public class InicioPage extends WebPage {
 		parent.add(new Button("login") {
 			@Override
 			public void onSubmit() {
-				ConfigurarPage confg = new ConfigurarPage(mundoApp, InicioPage.this );
+				ConfigurarPage confg = new ConfigurarPage(mundoApp);
 				this.setResponsePage(confg);
 			}
 

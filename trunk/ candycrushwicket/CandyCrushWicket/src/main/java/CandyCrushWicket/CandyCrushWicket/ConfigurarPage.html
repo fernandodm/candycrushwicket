@@ -8,93 +8,39 @@
 <body background="imagenes/fondoConfig.jpg">
 
 	<!-- NIVELES CREADOS -->
-	<div style="float: right; width: 50%" align="center">
-
-		<h4 style="color: #00557F">Niveles creados</h4>
-	</div>
-
-	<!-- CREAR NIVELES -->
-	<div style="border-right: 1px solid #353232; width: 50%">
-		<i><h4 style="color: #00557F" wicket:id="nombre"></h4></i>
-		<h4>Crear nivel:</h4>
-
-		<form wicket:id="mundoAppForm">
-			<table>
-				<tr>
-					<td align="right">Nombre:</td>
-					<td align="left"><input wicket:id="nivelEnConstruccion.nombre"
-						type="text" /></td>
-				</tr>
-
-				<tr>
-					<td align="right">Dificultad:</td>
-					<td align="left"><select
-						wicket:id="nivelEnConstruccion.dificultad"
-						name="mundoApp.nivelEnConstruccion.dificultad">
-
-					</select></td>
-				</tr>
-
-				<tr>
-					<td align="right">Tablero: Filas</td>
-					<td align="left"><input
-						wicket:id="nivelEnConstruccion.tablero.alto" type="text" /></td>
-					<td align="right">Columnas</td>
-					<td align="left"><input
-						wicket:id="nivelEnConstruccion.tablero.ancho" type="text" /></td>
-				</tr>
-
-				<tr>
-					<td>Canditadad de movimientos</td>
-					<td><input wicket:id="nivelEnConstruccion.cantidadMovimientos"
-						type="text" style="width: 50px" /></td>
-					<td>Cantidad de puntos</td>
-					<td><input wicket:id="nivelEnConstruccion.puntajeMinimo"
-						type="text" style="width: 50px" /></td>
-				</tr>
-
-			</table>
-
-
-			<h4>Objetivos:</h4>
-			<div class="datagrid" style="margin-top: 30px">
-
+	<form wicket:id="mundoForm2">
+		<div style="float: right; width: 45%;" align="center">
+			<h4 style="color: #00557F">Niveles creados</h4>
+			<div class="datagrid">
 				<table>
 					<thead>
 						<tr>
-							<th width="50%">Objetivos</th>
+							<th width="40%">Nombre</th>
 							<th width="8%">Editar</th>
 							<th width="8%">Borrar</th>
 						</tr>
 					</thead>
 					<tbody>
 
-						<tr wicket:id="nivelEnConstruccion.objetivos" class="alt">
-							<td width="50%"><span wicket:id="descripcion"></span></td>
+						<tr wicket:id="mundo.niveles" class="alt">
+							<td width="40%"><span wicket:id="nombre"></span></td>
+							 <td width="8%"><input type="submit"
+								wicket:id="editarNivel" value="Editar" class="colorBoton" /></td> 
+							<td width="8%"><input type="submit"
+								wicket:id="eliminarNivel" value="Eliminar" class="colorBoton" /></td>
 						</tr>
 
 					</tbody>
 				</table>
-
-				<table>
-					<tfoot>
-						<tr>
-							<div id="paging">
-								<input type="submit" wicket:id="agregarExplosionesPorColor"
-									value="Nuevo Explosiones por color" class="colorBoton" /> 
-								<input
-									type="submit" wicket:id="agregarGrandesExplosiones"
-									value="Nuevo Grandes explosiones" class="colorBoton" />
-							</div>
-						</tr>
-					</tfoot>
-				</table>
-
 			</div>
+		</div>
+	</form>
 
-		</form>
+	<span wicket:id="panel">x</span>
 
-	</div>
-
+	<form wicket:id="mundoForm">
+		<input type="submit" wicket:id="agregarNivel" value="Crear nivel"
+			class="colorBoton" />
+	</form>
 </body>
 </html>

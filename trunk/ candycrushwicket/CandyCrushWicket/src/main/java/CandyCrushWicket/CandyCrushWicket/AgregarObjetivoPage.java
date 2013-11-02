@@ -16,7 +16,7 @@ import appModel.MundoAppModel;
 public class AgregarObjetivoPage extends WebPage{
 	private static final long serialVersionUID = 1L;
 	private MundoAppModel mundoApp;
-	private ConfigurarPage confPage;
+	private EditarNivelPanel confPage;
 	private Objetivo objetivo;
 
 	public MundoAppModel getMundoApp() {
@@ -27,11 +27,11 @@ public class AgregarObjetivoPage extends WebPage{
 		this.mundoApp = mundoApp;
 	}
 
-	public ConfigurarPage getConfPage() {
+	public EditarNivelPanel getConfPage() {
 		return confPage;
 	}
 
-	public void setConfPage(ConfigurarPage confPage) {
+	public void setConfPage(EditarNivelPanel confPage) {
 		this.confPage = confPage;
 	}
 
@@ -44,7 +44,8 @@ public class AgregarObjetivoPage extends WebPage{
 	}
 
 	
-	public AgregarObjetivoPage(Objetivo obj, ConfigurarPage configurarPage, MundoAppModel mundo) {
+	public AgregarObjetivoPage(Objetivo obj, EditarNivelPanel configurarPage, MundoAppModel mundo) {
+//		this.add(new ObjetivoPanel("objetivo", obj, configurarPage, mundo));
 		this.objetivo = obj;
 		this.confPage = configurarPage;
 		this.mundoApp = mundo;
@@ -99,7 +100,7 @@ public class AgregarObjetivoPage extends WebPage{
 	}
 
 	protected void volver() {
-		this.setResponsePage(confPage);
+		this.setResponsePage(confPage.getConfigurarPage());
 		
 	}
 

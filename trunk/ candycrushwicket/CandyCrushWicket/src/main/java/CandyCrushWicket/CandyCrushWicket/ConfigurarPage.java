@@ -14,107 +14,84 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+
 import Tp.CandyCrush.Dificultad;
 import Tp.CandyCrush.ExplosionesPorColor;
 import Tp.CandyCrush.GrandesExplosiones;
+import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 import appModel.MundoAppModel;
 
-public class ConfigurarPage extends WebPage{
+public class ConfigurarPage extends WebPage {
 	private static final long serialVersionUID = 1L;
-	private InicioPage mainPage;
+	private EditarNivelPanel editarPanel;
 	private MundoAppModel mundoApp;
-	private Objetivo objetivoSeleccionado;
-	
-	public ConfigurarPage(MundoAppModel mundoModel, InicioPage mainPage) {
-		this.mainPage = mainPage;
+
+	public ConfigurarPage(MundoAppModel mundoModel) {
 		this.mundoApp = mundoModel;
-		this.add(new Label("nombre", "Bienvenido/a " + this.mundoApp.getNombreUsuario() + " ya podes configurar tus niveles"));
-		Form<MundoAppModel> form = new Form<MundoAppModel>("mundoAppForm", new CompoundPropertyModel<MundoAppModel>(this.mundoApp));
-		this.agregarCampos(form);
-		this.agregarGrillaObjetivos(form);
-		this.agregarAccionesObjetivo(form);
+		this.editarPanel = new EditarNivelPanel("panel", mundoModel, this);
+		this.add(this.editarPanel);
+		Form<MundoAppModel> form = new Form<MundoAppModel>("mundoForm",
+				new CompoundPropertyModel<MundoAppModel>(mundoModel));
+		Form<MundoAppModel> form2 = new Form<MundoAppModel>("mundoForm2",
+				new CompoundPropertyModel<MundoAppModel>(mundoModel));
+		this.agregarAcciones(form);
+		this.agregarGrillaNiveles(form2);
+		this.add(form2);
 		this.add(form);
+		
 	}
 
-	private void agregarGrillaObjetivos(Form<MundoAppModel> parent) {
-		
-		parent.add(new PropertyListView<Objetivo>("nivelEnConstruccion.objetivos") {
-		@Override
-		protected void populateItem(final ListItem<Objetivo> item) {
-			item.add(new Label("descripcion"));
+	private void agregarGrillaNiveles(Form<MundoAppModel> parent) {
+		parent.add(new PropertyListView<Nivel>("mundo.niveles") {
+			@Override
+			protected void populateItem(final ListItem<Nivel> item) {
+				item.add(new Label("nombre"));
+
+				item.add(new Button("eliminarNivel") {
+					@Override
+					public void onSubmit() {
+						ConfigurarPage.this.mundoApp
+								.setNivelSeleccionado(item.getModelObject());
+						ConfigurarPage.this.mundoApp.eliminarNivelSeleccionado();
+					}
+				});
+				
+				item.add(new Button("editarNivel") {
+					@Override
+					public void onSubmit() {
 						
+						ConfigurarPage.this.mundoApp
+							.setNivelEnConstruccion(item.getModelObject());
+
+						EditarNivelPage agregar = new EditarNivelPage(ConfigurarPage.this.mundoApp,ConfigurarPage.this);
+						this.setResponsePage(agregar);
+					}
+				});
 			}
 
 		});
+
 	}
 
-	private void agregarAccionesObjetivo(Form<MundoAppModel> parent) {
-		parent.add(new Button("agregarExplosionesPorColor") {
+
+	private void agregarAcciones(Form<MundoAppModel> parent) {
+		parent.add(new Button("agregarNivel") {
 			@Override
 			public void onSubmit() {
-				ConfigurarPage.this.agregarExplosionePorColor(new ExplosionesPorColor());
+				ConfigurarPage.this.agregarNivel(mundoApp.getNivelEnConstruccion());
+				mundoApp.setNivelEnConstruccion(new Nivel());
 			}
 
 		});
-		
-		parent.add(new Button("agregarGrandesExplosiones") {
-			@Override
-			public void onSubmit() {
-				ConfigurarPage.this.agregarGrandesExplosiones(new GrandesExplosiones());
-			}
 
-		});
 		
 	}
 
-	protected void agregarGrandesExplosiones(GrandesExplosiones obj) {
-
-		AgregarGrandesExplosionesPage agregar = new AgregarGrandesExplosionesPage(obj, this, this.mundoApp);
-		this.setResponsePage(agregar);
+	protected void agregarNivel(Nivel niv) {
+		
+		mundoApp.agregarNivel(niv);
+		
 	}
 
-	
-	protected void agregarExplosionePorColor(ExplosionesPorColor obj) {
-
-		AgregarExplosionesPorColorPage agregar = new AgregarExplosionesPorColorPage(obj, this, this.mundoApp);
-		this.setResponsePage(agregar);
-	}
-
-	private void agregarCampos(Form<MundoAppModel> parent) {
-		parent.add(new TextField<String>("nivelEnConstruccion.nombre"));
-		parent.add(new DropDownChoice<Dificultad>("nivelEnConstruccion.dificultad", crearListaDificultades(), createDificultadChoiceRenderer()));
-		parent.add(new TextField<String>("nivelEnConstruccion.tablero.alto"));
-		parent.add(new TextField<String>("nivelEnConstruccion.tablero.ancho"));
-		parent.add(new TextField<String>("nivelEnConstruccion.cantidadMovimientos"));
-		parent.add(new TextField<String>("nivelEnConstruccion.puntajeMinimo"));
-	}
-
-	
-	protected ChoiceRenderer<Dificultad> createDificultadChoiceRenderer() {
-		return new ChoiceRenderer<Dificultad>() {
-			@Override
-			public Object getDisplayValue(Dificultad object) {
-				return object.getNombre();
-			}
-		};
-	}
-
-	protected LoadableDetachableModel<List<Dificultad>> crearListaDificultades() {
-		return new LoadableDetachableModel<List<Dificultad>>() {
-			@Override
-			protected List<Dificultad> load() {
-				return Dificultad.getDificultades();
-			}
-		};
-	}
-
-	public Objetivo getObjetivoSeleccionado() {
-		return objetivoSeleccionado;
-	}
-
-	public void setObjetivoSeleccionado(Objetivo objetivoSeleccionado) {
-		this.objetivoSeleccionado = objetivoSeleccionado;
-	}
-	
 }

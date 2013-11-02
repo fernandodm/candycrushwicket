@@ -22,7 +22,9 @@ public class MundoAppModel implements Serializable {
 	private Mundo mundo = new Mundo();
 	private Nivel nivelEnConstruccion = new Nivel();
 	private List<Nivel> niveles;
-	private Objetivo objetivo;
+	private Objetivo objetivo; // NO
+	private Objetivo objetivoSeleccionado;
+	private Nivel nivelSeleccionado;
 	
 	public List<Nivel> getNiveles() {
 		return niveles;
@@ -79,6 +81,32 @@ public class MundoAppModel implements Serializable {
 		}
 		
 		return this.getNiveles();
+	}
+	public Objetivo getObjetivoSeleccionado() {
+		return objetivoSeleccionado;
+	}
+	public void setObjetivoSeleccionado(Objetivo objetivoSeleccionado) {
+		this.objetivoSeleccionado = objetivoSeleccionado;
+	}
+	public void eliminarObjetivoSeleccionado() {
+		
+		nivelEnConstruccion.eliminarObjetivo(objetivoSeleccionado);
+		
+	}
+	public Nivel getNivelSeleccionado() {
+		return nivelSeleccionado;
+	}
+	public void setNivelSeleccionado(Nivel nivelSeleccionado) {
+		this.nivelSeleccionado = nivelSeleccionado;
+	}
+	public void eliminarNivelSeleccionado() {
+		mundo.eliminarNivel(nivelSeleccionado);
+		
+	}
+	public void eliminarNivel(Nivel nivel) {
+	
+		mundo.eliminarNivel(nivel);
+		
 	}
 
 	
