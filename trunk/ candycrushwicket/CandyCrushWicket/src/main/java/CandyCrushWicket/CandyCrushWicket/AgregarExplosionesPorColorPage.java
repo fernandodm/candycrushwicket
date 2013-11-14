@@ -13,9 +13,9 @@ public class AgregarExplosionesPorColorPage extends AgregarObjetivoPage{
 	
 	
 	public AgregarExplosionesPorColorPage(ExplosionesPorColor obj,
-			EditarNivelPanel configurarPage, MundoAppModel mundo) {
+			EditarNivelPanel editNivelPanel, MundoAppModel mundo) {
 		
-		super(obj, configurarPage,mundo);
+		super(obj, editNivelPanel,mundo);
 		//this.add(new ExplosionesPorColorPanel("expPorColor", obj, configurarPage, mundo));
 		Form<ExplosionesPorColor> form = (Form<ExplosionesPorColor>) this.get("objetivoForm");
 		this.agregarCampo(form);		

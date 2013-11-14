@@ -25,6 +25,7 @@ public class MundoAppModel implements Serializable {
 	private Objetivo objetivo; // NO
 	private Objetivo objetivoSeleccionado;
 	private Nivel nivelSeleccionado;
+	private String filtro;
 	
 	public List<Nivel> getNiveles() {
 		return niveles;
@@ -68,20 +69,6 @@ public class MundoAppModel implements Serializable {
 		this.mundo.getNiveles().add(niv);
 	}
 	
-
-
-	public List<Nivel> buscarPorNombre(String nombre){
-		this.setNiveles(new ArrayList<Nivel>());
-		
-			for(Nivel each: this.mundo.getNiveles()){
-				System.out.println(each.getNombre().contains(nombre));
-				if(each.getNombre().contains(nombre))
-					this.getNiveles().add(each);
-		
-		}
-		
-		return this.getNiveles();
-	}
 	public Objetivo getObjetivoSeleccionado() {
 		return objetivoSeleccionado;
 	}
@@ -107,6 +94,25 @@ public class MundoAppModel implements Serializable {
 	
 		mundo.eliminarNivel(nivel);
 		
+	}
+	public String getFiltro() {
+		return filtro;
+	}
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
+	public List<Nivel> buscarPorNombre(String nombre){
+		this.setNiveles(new ArrayList<Nivel>());
+		
+			for(Nivel each: this.mundo.getNiveles()){
+				System.out.println(each.getNombre().contains(nombre));
+				if(each.getNombre().contains(nombre))
+					this.getNiveles().add(each);
+		
+		}
+		
+		return this.getNiveles();
 	}
 
 	

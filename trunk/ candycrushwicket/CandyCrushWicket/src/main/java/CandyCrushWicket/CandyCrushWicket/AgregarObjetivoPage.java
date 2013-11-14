@@ -10,13 +10,15 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
+import Tp.CandyCrush.ExplosionesPorColor;
+import Tp.CandyCrush.GrandesExplosiones;
 import Tp.CandyCrush.Objetivo;
 import appModel.MundoAppModel;
 
 public class AgregarObjetivoPage extends WebPage{
 	private static final long serialVersionUID = 1L;
 	private MundoAppModel mundoApp;
-	private EditarNivelPanel confPage;
+	private EditarNivelPanel editarNivelPanel;
 	private Objetivo objetivo;
 
 	public MundoAppModel getMundoApp() {
@@ -27,12 +29,12 @@ public class AgregarObjetivoPage extends WebPage{
 		this.mundoApp = mundoApp;
 	}
 
-	public EditarNivelPanel getConfPage() {
-		return confPage;
+	public EditarNivelPanel getEditarNivelPanel() {
+		return editarNivelPanel;
 	}
 
-	public void setConfPage(EditarNivelPanel confPage) {
-		this.confPage = confPage;
+	public void setEditarNivelPanel(EditarNivelPanel editNivPanel) {
+		this.editarNivelPanel = editNivPanel;
 	}
 
 	public Objetivo getObjetivo() {
@@ -44,10 +46,10 @@ public class AgregarObjetivoPage extends WebPage{
 	}
 
 	
-	public AgregarObjetivoPage(Objetivo obj, EditarNivelPanel configurarPage, MundoAppModel mundo) {
-//		this.add(new ObjetivoPanel("objetivo", obj, configurarPage, mundo));
+	public AgregarObjetivoPage(Objetivo obj, EditarNivelPanel edNivPanel, MundoAppModel mundo) {
+
 		this.objetivo = obj;
-		this.confPage = configurarPage;
+		this.editarNivelPanel = edNivPanel;
 		this.mundoApp = mundo;
 		Form<Objetivo> form = new Form<Objetivo>("objetivoForm", new CompoundPropertyModel<Objetivo>(this.objetivo));
 		this.agregarAcciones(form);
@@ -76,11 +78,14 @@ public class AgregarObjetivoPage extends WebPage{
 				
 				AgregarObjetivoPage.this.volver();
 			}
-
 		});
 		
 	}
 	
+	protected void agregar(Objetivo obj) {
+		this.mundoApp.getNivelEnConstruccion().agregarObjetivo(obj);
+	}
+
 	protected ChoiceRenderer<String> createColorChoiceRenderer() {
 		return new ChoiceRenderer<String>() {
 			@Override
@@ -100,14 +105,11 @@ public class AgregarObjetivoPage extends WebPage{
 	}
 
 	protected void volver() {
-		this.setResponsePage(confPage.getConfigurarPage());
-		
+		this.setResponsePage(editarNivelPanel.getPage());
 	}
 
 	protected void agregarObjetivo() {
-		
 		this.mundoApp.getNivelEnConstruccion().agregarObjetivo(this.objetivo);
-		
 	}
 
 
