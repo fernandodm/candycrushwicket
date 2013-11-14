@@ -14,9 +14,9 @@ import appModel.MundoAppModel;
 public class AgregarGrandesExplosionesPage extends AgregarObjetivoPage {
 
 	public AgregarGrandesExplosionesPage(GrandesExplosiones obj,
-			EditarNivelPanel configurarPage, MundoAppModel mundo) {
-		super(obj, configurarPage, mundo);
-		//this.add(new GrandesExplosionesPanel("grandesExp", obj, configurarPage, mundo));
+			EditarNivelPanel editNivelPanel, MundoAppModel mundo) {
+		super(obj, editNivelPanel, mundo);
+		
 		Form<GrandesExplosiones> form = (Form<GrandesExplosiones>) this.get("objetivoForm");
 		this.agregarCampo(form);		
 	}

@@ -17,18 +17,20 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import Tp.CandyCrush.Dificultad;
 import Tp.CandyCrush.ExplosionesPorColor;
 import Tp.CandyCrush.GrandesExplosiones;
+import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 import appModel.MundoAppModel;
 
 public class EditarNivelPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 	private MundoAppModel mundoApp;
-	private ConfigurarPage configurarPage;
+	private EdicionCreacionNivelCommand command;
 	
-	public EditarNivelPanel(String id, MundoAppModel mundoModel, ConfigurarPage web) {
+	public EditarNivelPanel(String id, MundoAppModel mundoModel, EdicionCreacionNivelCommand command) {
 		super(id);
-		this.setConfigurarPage(web);
 		this.mundoApp = mundoModel;
+		this.command = command;
+		
 		this.add(new Label("nombre", "Bienvenido/a "
 				+ this.mundoApp.getNombreUsuario()
 				+ " ya podes configurar tus niveles"));
@@ -37,7 +39,22 @@ public class EditarNivelPanel extends Panel {
 		this.agregarCampos(form);
 		this.agregarGrillaObjetivos(form);
 		this.agregarAccionesObjetivo(form);
+		this.agregarAcciones(form);
 		this.add(form);
+	}
+
+	private void agregarAcciones(Form<MundoAppModel> form) {
+		form.add(new Button("aceptar") {
+			@Override
+			public void onSubmit() {
+				command.aceptarNivel(getNivelEnConstruccion());
+			}
+		});
+	}
+	
+	protected Nivel getNivelEnConstruccion() {
+
+		return mundoApp.getNivelEnConstruccion();
 	}
 
 	private void agregarGrillaObjetivos(Form<MundoAppModel> parent) {
@@ -90,8 +107,7 @@ public class EditarNivelPanel extends Panel {
 		parent.add(new Button("agregarExplosionesPorColor") {
 			@Override
 			public void onSubmit() {
-				EditarNivelPanel.this
-						.agregarExplosionesPorColor(new ExplosionesPorColor());
+				EditarNivelPanel.this.agregarExplosionesPorColor(new ExplosionesPorColor());
 			}
 
 		});
@@ -99,8 +115,7 @@ public class EditarNivelPanel extends Panel {
 		parent.add(new Button("agregarGrandesExplosiones") {
 			@Override
 			public void onSubmit() {
-				EditarNivelPanel.this
-						.agregarGrandesExplosiones(new GrandesExplosiones());
+				EditarNivelPanel.this.agregarGrandesExplosiones(new GrandesExplosiones());
 			}
 
 		});
@@ -120,6 +135,7 @@ public class EditarNivelPanel extends Panel {
 	}
 
 	private void agregarCampos(Form<MundoAppModel> parent) {
+		
 		parent.add(new TextField<String>("nivelEnConstruccion.nombre"));
 		parent.add(new DropDownChoice<Dificultad>(
 				"nivelEnConstruccion.dificultad", crearListaDificultades(),
@@ -148,14 +164,5 @@ public class EditarNivelPanel extends Panel {
 			}
 		};
 	}
-
-	public ConfigurarPage getConfigurarPage() {
-		return configurarPage;
-	}
-
-	public void setConfigurarPage(ConfigurarPage configurarPage) {
-		this.configurarPage = configurarPage;
-	}
-	
 
 }

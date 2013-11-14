@@ -24,8 +24,8 @@
 
 						<tr wicket:id="mundo.niveles" class="alt">
 							<td width="40%"><span wicket:id="nombre"></span></td>
-							 <td width="8%"><input type="submit"
-								wicket:id="editarNivel" value="Editar" class="colorBoton" /></td> 
+							<td width="8%"><input type="submit" wicket:id="editarNivel"
+								value="Editar" class="colorBoton" /></td>
 							<td width="8%"><input type="submit"
 								wicket:id="eliminarNivel" value="Eliminar" class="colorBoton" /></td>
 						</tr>
@@ -33,14 +33,38 @@
 					</tbody>
 				</table>
 			</div>
+			
+			<!--TABLA BUSCAR  -->
+			<div class="datagrid" style="margin-top: 30px">
+				<input type="submit" wicket:id="filtrar" value="Filtrar"
+					class="colorBoton" /> <input wicket:id="filtro" type="text" />
+				<table>
+					<thead>
+						<tr class="alt">
+							<th width="40%">Niveles</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr wicket:id="niveles" class="alt">
+							<td width="40%"><span wicket:id="nombre"></span></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
 		</div>
+
 	</form>
 
 	<span wicket:id="panel">x</span>
 
-	<form wicket:id="mundoForm">
+	<!--  <form wicket:id="mundoForm">
+	
 		<input type="submit" wicket:id="agregarNivel" value="Crear nivel"
 			class="colorBoton" />
-	</form>
+	</form>-->
+
 </body>
 </html>
