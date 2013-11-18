@@ -6,8 +6,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import Tp.CandyCrush.ExplosionesPorColor;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
-import appModel.MundoAppModel;
 
+@SuppressWarnings("all")
 public class EditarExplosionesPorColorPanel extends EditarObjetivoPanel{
 
 	public EditarExplosionesPorColorPanel(String id, Objetivo obj,

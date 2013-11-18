@@ -14,6 +14,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import Tp.CandyCrush.Nivel;
 import appModel.MundoAppModel;
 
+@SuppressWarnings("all")
 public class ConfigurarPage extends WebPage implements EdicionCreacionNivelCommand {
 	private static final long serialVersionUID = 1L;
 	private EditarNivelPanel editarPanel;

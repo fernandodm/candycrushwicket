@@ -6,17 +6,13 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-
-import net.sf.oval.constraint.ValidateWithMethod;
-import Tp.CandyCrush.Dificultad;
-import Tp.CandyCrush.ExplosionesPorColor;
-import Tp.CandyCrush.GrandesExplosiones;
 import Tp.CandyCrush.Mundo;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
-import Tp.CandyCrush.Tablero;
+
 
 @Observable
+@SuppressWarnings("all")
 public class MundoAppModel implements Serializable {
 	
 	private String nombreUsuario;
