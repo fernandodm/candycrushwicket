@@ -13,7 +13,7 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("all")
 public class EditarObjetivoPanel extends Panel{
 	
 	private EditarNivelPanel editarNivelPanel;

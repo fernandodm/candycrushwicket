@@ -9,6 +9,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import Tp.CandyCrush.Nivel;
 import appModel.MundoAppModel;
 
+@SuppressWarnings("all")
 public class EditarNivelPage extends WebPage implements EdicionCreacionNivelCommand {
 	private ConfigurarPage confPage; 
 	private MundoAppModel mundoApp;

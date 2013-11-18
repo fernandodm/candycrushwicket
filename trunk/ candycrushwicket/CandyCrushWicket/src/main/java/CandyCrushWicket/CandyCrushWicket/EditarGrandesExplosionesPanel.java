@@ -11,8 +11,8 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import Tp.CandyCrush.GrandesExplosiones;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
-import appModel.MundoAppModel;
 
+@SuppressWarnings("all")
 public class EditarGrandesExplosionesPanel extends EditarObjetivoPanel{
 
 	public EditarGrandesExplosionesPanel(String id, Objetivo obj,

@@ -21,6 +21,7 @@ import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 import appModel.MundoAppModel;
 
+@SuppressWarnings("all")
 public class EditarNivelPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 	private MundoAppModel mundoApp;
