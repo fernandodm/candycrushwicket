@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.WebPage;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 
-public class AgregarObjetivoPage extends WebPage implements EdicionCreacionObjetivoCommand{
+public class EditarObjetivoPage extends WebPage  implements EdicionCreacionObjetivoCommand{
 	
 	private EditarNivelPanel editarNivelPanel;
 	private Objetivo objetivo;
@@ -37,8 +37,6 @@ public class AgregarObjetivoPage extends WebPage implements EdicionCreacionObjet
 	}
 
 	public void aceptarObjetivo(Objetivo objetivo) {
-	
-		this.nivel.agregarObjetivo(objetivo);
 		
 	}
 

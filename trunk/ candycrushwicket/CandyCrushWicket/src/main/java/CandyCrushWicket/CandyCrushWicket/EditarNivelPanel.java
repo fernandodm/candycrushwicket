@@ -25,12 +25,14 @@ public class EditarNivelPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 	private MundoAppModel mundoApp;
 	private EdicionCreacionNivelCommand command;
+	private EditarObjetivoPanel objetivoPanel;
+
 	
 	public EditarNivelPanel(String id, MundoAppModel mundoModel, EdicionCreacionNivelCommand command) {
 		super(id);
 		this.mundoApp = mundoModel;
 		this.command = command;
-		
+				
 		this.add(new Label("nombre", "Bienvenido/a "
 				+ this.mundoApp.getNombreUsuario()
 				+ " ya podes configurar tus niveles"));
@@ -67,8 +69,7 @@ public class EditarNivelPanel extends Panel {
 				item.add(new Button("eliminarObjetivo") {
 					@Override
 					public void onSubmit() {
-						EditarNivelPanel.this.mundoApp
-								.setObjetivoSeleccionado(item.getModelObject());
+						EditarNivelPanel.this.mundoApp.setObjetivoSeleccionado(item.getModelObject());
 						EditarNivelPanel.this.mundoApp.eliminarObjetivoSeleccionado();
 					}
 				});
@@ -77,16 +78,22 @@ public class EditarNivelPanel extends Panel {
 					@Override
 					public void onSubmit() {
 						EditarNivelPanel.this.mundoApp.setObjetivoSeleccionado(item.getModelObject());
-						
+	
 						if(EditarNivelPanel.this.mundoApp.getObjetivoSeleccionado().esGrandesExplosiones()){
-							EditarNivelPanel.this.eliminarObjetivoSeleccionado();
-							EditarNivelPanel.this
-							.agregarGrandesExplosiones((GrandesExplosiones) EditarNivelPanel.this.mundoApp.getObjetivoSeleccionado());
+							
+							GrandesExplosiones obj = (GrandesExplosiones) EditarNivelPanel.this.mundoApp.getObjetivoSeleccionado(); 
+							Nivel niv = EditarNivelPanel.this.mundoApp.getNivelEnConstruccion();
+							
+							EditarNivelPanel.this.objetivoPanel = new EditarGrandesExplosionesPanel("objetivoPanel", obj, EditarNivelPanel.this, niv);
+							EditarNivelPanel.this.editarGrandesExplosiones(obj);
 							
 						}else{
-							EditarNivelPanel.this.eliminarObjetivoSeleccionado();
-							EditarNivelPanel.this
-							.agregarExplosionesPorColor((ExplosionesPorColor) EditarNivelPanel.this.mundoApp.getObjetivoSeleccionado());
+			
+							ExplosionesPorColor obj = (ExplosionesPorColor) EditarNivelPanel.this.mundoApp.getObjetivoSeleccionado(); 
+							Nivel niv = EditarNivelPanel.this.mundoApp.getNivelEnConstruccion();
+							
+							EditarNivelPanel.this.objetivoPanel = new EditarExplosionesPorColorPanel("objetivoPanel", obj, EditarNivelPanel.this, niv);
+							EditarNivelPanel.this.editarExplosionesPorColor(obj);
 							
 						}
 						
@@ -98,16 +105,13 @@ public class EditarNivelPanel extends Panel {
 
 	}
 
-	protected void eliminarObjetivoSeleccionado() {
-		mundoApp.getNivelEnConstruccion().eliminarObjetivo(mundoApp.getObjetivoSeleccionado());
-		
-	}
-
 	private void agregarAccionesObjetivo(Form<MundoAppModel> parent) {
 		parent.add(new Button("agregarExplosionesPorColor") {
 			@Override
 			public void onSubmit() {
-				EditarNivelPanel.this.agregarExplosionesPorColor(new ExplosionesPorColor());
+				ExplosionesPorColor obj = new ExplosionesPorColor();
+				EditarNivelPanel.this.objetivoPanel = new EditarExplosionesPorColorPanel("objetivoPanel", obj, EditarNivelPanel.this, EditarNivelPanel.this.mundoApp.getNivelEnConstruccion());
+				EditarNivelPanel.this.agregarExplosionesPorColor(obj);
 			}
 
 		});
@@ -115,22 +119,42 @@ public class EditarNivelPanel extends Panel {
 		parent.add(new Button("agregarGrandesExplosiones") {
 			@Override
 			public void onSubmit() {
-				EditarNivelPanel.this.agregarGrandesExplosiones(new GrandesExplosiones());
+				GrandesExplosiones obj = new GrandesExplosiones();
+				EditarNivelPanel.this.objetivoPanel = new EditarGrandesExplosionesPanel("objetivoPanel", obj , EditarNivelPanel.this, EditarNivelPanel.this.mundoApp.getNivelEnConstruccion());
+				EditarNivelPanel.this.agregarGrandesExplosiones(obj);
 			}
 
 		});
 
 	}
 
+	
 	protected void agregarGrandesExplosiones(GrandesExplosiones obj) {
 
-		AgregarGrandesExplosionesPage agregar = new AgregarGrandesExplosionesPage(obj, this, this.mundoApp);
+		AgregarGrandesExplosionesPage agregar = new AgregarGrandesExplosionesPage(obj, this, objetivoPanel);
+		objetivoPanel.setCommand(agregar);
 		this.setResponsePage(agregar);
 	}
 
 	protected void agregarExplosionesPorColor(ExplosionesPorColor obj) {
 
-		AgregarExplosionesPorColorPage agregar = new AgregarExplosionesPorColorPage(obj, this, this.mundoApp);
+		AgregarExplosionesPorColorPage agregar = new AgregarExplosionesPorColorPage(obj, this, objetivoPanel);
+		objetivoPanel.setCommand(agregar);
+		this.setResponsePage(agregar);
+	}
+
+	
+	protected void editarGrandesExplosiones(GrandesExplosiones obj) {
+
+		EditarGrandesExplosionesPage agregar = new EditarGrandesExplosionesPage(obj, this, objetivoPanel);
+		objetivoPanel.setCommand(agregar);
+		this.setResponsePage(agregar);
+	}
+
+	protected void editarExplosionesPorColor(ExplosionesPorColor obj) {
+
+		EditarExplosionesPorColorPage agregar = new EditarExplosionesPorColorPage(obj, this, objetivoPanel);
+		objetivoPanel.setCommand(agregar);
 		this.setResponsePage(agregar);
 	}
 
@@ -164,5 +188,4 @@ public class EditarNivelPanel extends Panel {
 			}
 		};
 	}
-
 }

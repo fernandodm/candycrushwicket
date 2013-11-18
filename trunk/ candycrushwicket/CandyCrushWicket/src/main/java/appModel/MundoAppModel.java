@@ -9,6 +9,8 @@ import org.uqbar.commons.utils.Observable;
 
 import net.sf.oval.constraint.ValidateWithMethod;
 import Tp.CandyCrush.Dificultad;
+import Tp.CandyCrush.ExplosionesPorColor;
+import Tp.CandyCrush.GrandesExplosiones;
 import Tp.CandyCrush.Mundo;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
@@ -22,7 +24,6 @@ public class MundoAppModel implements Serializable {
 	private Mundo mundo = new Mundo();
 	private Nivel nivelEnConstruccion = new Nivel();
 	private List<Nivel> niveles;
-	private Objetivo objetivo; // NO
 	private Objetivo objetivoSeleccionado;
 	private Nivel nivelSeleccionado;
 	private String filtro;
@@ -57,12 +58,6 @@ public class MundoAppModel implements Serializable {
 	public List<Objetivo> objetivosDelNivel() {
 		
 		return nivelEnConstruccion.getObjetivos();
-	}
-	public Objetivo getObjetivo() {
-		return objetivo;
-	}
-	public void setObjetivo(Objetivo objetivo) {
-		this.objetivo = objetivo;
 	}
 	
 	public void agregarNivel(Nivel niv){
@@ -114,6 +109,10 @@ public class MundoAppModel implements Serializable {
 		
 		return this.getNiveles();
 	}
-
 	
+
+	public void agregarObjetivoAlNivel(Objetivo obj) {
+		getNivelEnConstruccion().agregarObjetivo(obj);
+		
+	}
 }
