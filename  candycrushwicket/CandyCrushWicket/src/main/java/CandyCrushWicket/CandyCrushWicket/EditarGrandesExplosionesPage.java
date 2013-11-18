@@ -2,11 +2,10 @@ package CandyCrushWicket.CandyCrushWicket;
 
 import Tp.CandyCrush.GrandesExplosiones;
 
-public class AgregarGrandesExplosionesPage extends AgregarObjetivoPage{
+public class EditarGrandesExplosionesPage extends EditarObjetivoPage{
 	
-
 	
-	public AgregarGrandesExplosionesPage(GrandesExplosiones obj,
+	public EditarGrandesExplosionesPage(GrandesExplosiones obj,
 			EditarNivelPanel editarNivelPanel, EditarObjetivoPanel objetivoPanel) {
 		
 		setObjetivo(obj);
@@ -18,5 +17,4 @@ public class AgregarGrandesExplosionesPage extends AgregarObjetivoPage{
 	}
 
 	
-
 }

@@ -1,12 +1,10 @@
 package CandyCrushWicket.CandyCrushWicket;
 
-import Tp.CandyCrush.GrandesExplosiones;
+import Tp.CandyCrush.ExplosionesPorColor;
 
-public class AgregarGrandesExplosionesPage extends AgregarObjetivoPage{
-	
+public class EditarExplosionesPorColorPage extends EditarObjetivoPage{
 
-	
-	public AgregarGrandesExplosionesPage(GrandesExplosiones obj,
+	public EditarExplosionesPorColorPage(ExplosionesPorColor obj,
 			EditarNivelPanel editarNivelPanel, EditarObjetivoPanel objetivoPanel) {
 		
 		setObjetivo(obj);
@@ -14,9 +12,5 @@ public class AgregarGrandesExplosionesPage extends AgregarObjetivoPage{
 		setObjetivoPanel(objetivoPanel);
 		setNivel(objetivoPanel.getNivel());
 		this.add(getObjetivoPanel());
-		
 	}
-
-	
-
 }
