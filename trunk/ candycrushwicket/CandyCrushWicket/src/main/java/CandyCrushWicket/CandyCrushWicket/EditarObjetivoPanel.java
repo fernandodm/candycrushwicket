@@ -21,22 +21,6 @@ public class EditarObjetivoPanel extends Panel{
 	private EdicionCreacionObjetivoCommand command;
 	private Nivel nivel;
 
-	public EditarNivelPanel getEditarNivelPanel() {
-		return editarNivelPanel;
-	}
-
-	public void setEditarNivelPanel(EditarNivelPanel editNivPanel) {
-		this.editarNivelPanel = editNivPanel;
-	}
-
-	public Objetivo getObjetivo() {
-		return objetivo;
-	}
-
-	public void setObjetivo(Objetivo objetivo) {
-		this.objetivo = objetivo;
-	}
-
 	public EditarObjetivoPanel(String id, Objetivo obj, EditarNivelPanel edNivPanel, Nivel niv) {
 		super(id);
 		
@@ -44,9 +28,24 @@ public class EditarObjetivoPanel extends Panel{
 		this.editarNivelPanel = edNivPanel;
 		this.nivel = niv;
 		Form<Objetivo> form = new Form<Objetivo>("objetivoForm", new CompoundPropertyModel<Objetivo>(this.objetivo));
+		Form<Objetivo> formCancelar = new Form<Objetivo>("objetivoCancelar", new CompoundPropertyModel<Objetivo>(this.objetivo));
 		this.agregarAcciones(form);
 		this.agregarCampos(form);
+		this.agregarCancelar(formCancelar);
 		this.add(form);
+		this.add(formCancelar);
+		
+	}
+
+	private void agregarCancelar(Form<Objetivo> parent) {
+		parent.add(new Button("cancelar") {
+			@Override
+			public void onSubmit() {
+							
+				EditarObjetivoPanel.this.volver();
+				
+			}
+		});
 		
 	}
 
@@ -63,17 +62,7 @@ public class EditarObjetivoPanel extends Panel{
 				EditarObjetivoPanel.this.volver();
 			}
 
-		});
-		
-		parent.add(new Button("cancelar") {
-			@Override
-			public void onSubmit() {
-							
-				EditarObjetivoPanel.this.volver();
-				
-			}
-		});
-		
+		});		
 	}
 	
 
@@ -117,5 +106,21 @@ public class EditarObjetivoPanel extends Panel{
 
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;
+	}
+	
+	public EditarNivelPanel getEditarNivelPanel() {
+		return editarNivelPanel;
+	}
+
+	public void setEditarNivelPanel(EditarNivelPanel editNivPanel) {
+		this.editarNivelPanel = editNivPanel;
+	}
+
+	public Objetivo getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(Objetivo objetivo) {
+		this.objetivo = objetivo;
 	}
 }
