@@ -15,6 +15,6 @@ public class AgregarExplosionesPorColorPage extends AgregarObjetivoPage{
 		this.add(getObjetivoPanel());
 		
 	}
-
 	
 }
+

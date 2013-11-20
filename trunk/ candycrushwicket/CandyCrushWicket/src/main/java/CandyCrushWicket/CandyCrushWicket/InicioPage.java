@@ -1,5 +1,8 @@
 package CandyCrushWicket.CandyCrushWicket;
 
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.PageParameters;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -25,7 +28,12 @@ public class InicioPage extends WebPage {
     }
     
     private void agregarCampo(Form<MundoAppModel> parent) {
-		parent.add(new TextField<String>("nombreUsuario"));
+		
+		final TextField<String> userTextField = new TextField<String>("nombreUsuario");
+		userTextField.setRequired(Boolean.TRUE);
+		userTextField.add(new PropertyValidator());
+		parent.add(userTextField);
+		parent.add(new FeedbackPanel("feedbackPanel"));
 	}
 
     private void agregarAcciones(Form<MundoAppModel> parent) {

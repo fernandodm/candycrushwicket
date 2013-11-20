@@ -1,11 +1,19 @@
 package appModel;
 
+import org.uqbar.commons.model.UserException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
+
+
+
+
+import net.sf.oval.constraint.ValidateWithMethod;
+import Tp.CandyCrush.Dificultad;
 import Tp.CandyCrush.Mundo;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
@@ -16,7 +24,6 @@ import Tp.CandyCrush.Objetivo;
 public class MundoAppModel implements Serializable {
 	
 	private String nombreUsuario;
-	
 	private Mundo mundo = new Mundo();
 	private Nivel nivelEnConstruccion = new Nivel();
 	private List<Nivel> niveles;
@@ -33,13 +40,28 @@ public class MundoAppModel implements Serializable {
 	public Nivel getNivelEnConstruccion() {
 		return nivelEnConstruccion;
 	}
+		
+	public void validarAlto(Integer unAlto) {
+		if (unAlto < 3) {
+			throw new UserException("Altura mínima: 3");
+		}
+	}
+	
 	public void setNivelEnConstruccion(Nivel nivelEnConstruccion) {
 		this.nivelEnConstruccion = nivelEnConstruccion;
 	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
+	
+	public void validarNombreUsuario(String unNombre) {
+		if (unNombre.contains(" ")) {
+			throw new UserException("Ingrese un nombre de usuario válido sin dejar espacios");
+		}
+	}
+	
 	public void setNombreUsuario(String nombreUsuario) {
+		this.validarNombreUsuario(nombreUsuario);
 		this.nombreUsuario = nombreUsuario;
 	}
 	public Mundo getMundo() {
@@ -57,6 +79,7 @@ public class MundoAppModel implements Serializable {
 	}
 	
 	public void agregarNivel(Nivel niv){
+		this.validarAlto(this.nivelEnConstruccion.getTablero().getAlto());
 		this.mundo.getNiveles().add(niv);
 	}
 	

@@ -49,5 +49,12 @@ public class AgregarObjetivoPage extends WebPage implements EdicionCreacionObjet
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;
 	}
+	
+	/*public void validarObjetivo(Objetivo unObjetivo) {
+	if (! unObjetivo.puedeAgregarObjetivo()) {
+		throw new UserException("La cantidad debe ser mayor a 0");
+	}
+}*/
+
 
 }
