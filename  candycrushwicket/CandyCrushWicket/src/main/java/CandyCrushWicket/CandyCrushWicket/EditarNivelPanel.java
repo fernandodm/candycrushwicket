@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -161,15 +162,38 @@ public class EditarNivelPanel extends Panel {
 
 	private void agregarCampos(Form<MundoAppModel> parent) {
 		
-		parent.add(new TextField<String>("nivelEnConstruccion.nombre"));
-		parent.add(new DropDownChoice<Dificultad>(
+		final DropDownChoice<Dificultad> dificultad = new DropDownChoice<Dificultad>(
 				"nivelEnConstruccion.dificultad", crearListaDificultades(),
-				createDificultadChoiceRenderer()));
-		parent.add(new TextField<String>("nivelEnConstruccion.tablero.alto"));
-		parent.add(new TextField<String>("nivelEnConstruccion.tablero.ancho"));
-		parent.add(new TextField<String>(
-				"nivelEnConstruccion.cantidadMovimientos"));
-		parent.add(new TextField<String>("nivelEnConstruccion.puntajeMinimo"));
+				createDificultadChoiceRenderer());
+		dificultad.setRequired(Boolean.TRUE);
+		parent.add(dificultad);
+		
+		final TextField<String> nameTextField = new TextField<String>("nivelEnConstruccion.nombre");
+		nameTextField.setRequired(Boolean.TRUE);
+		parent.add(nameTextField);
+		
+		final TextField<String> heightTextField = new TextField<String>("nivelEnConstruccion.tablero.alto");
+		heightTextField.setRequired(Boolean.TRUE);
+		//heightTextField.add(new PropertyValidator());
+		parent.add(heightTextField);
+		
+		final TextField<String> weightTextField = new TextField<String>("nivelEnConstruccion.tablero.ancho");
+		weightTextField.setRequired(Boolean.TRUE);
+		//weightTextField.add(new PropertyValidator());
+		parent.add(weightTextField);
+			
+		final TextField<String> movesTextField = new TextField<String>("nivelEnConstruccion.cantidadMovimientos");
+		movesTextField.setRequired(Boolean.TRUE);
+		//movesTextField.add(new PropertyValidator());
+		parent.add(movesTextField);
+		
+		final TextField<String> scoreTextField = new TextField<String>("nivelEnConstruccion.puntajeMinimo");
+		scoreTextField.setRequired(Boolean.TRUE);
+		//scoreTextField.add(new PropertyValidator());
+		parent.add(scoreTextField);
+		
+		parent.add(new FeedbackPanel("feedbackPanel"));
+	
 	}
 
 	protected ChoiceRenderer<Dificultad> createDificultadChoiceRenderer() {
@@ -190,3 +214,4 @@ public class EditarNivelPanel extends Panel {
 		};
 	}
 }
+
