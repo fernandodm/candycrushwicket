@@ -2,6 +2,7 @@ package CandyCrushWicket.CandyCrushWicket;
 
 import org.apache.wicket.markup.html.WebPage;
 
+import Tp.CandyCrush.ExplosionesPorColor;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
 
@@ -12,6 +13,17 @@ public class AgregarObjetivoPage extends WebPage implements EdicionCreacionObjet
 	private EditarObjetivoPanel objetivoPanel;
 	private Nivel nivel;
 
+	public AgregarObjetivoPage(Objetivo obj,
+			EditarNivelPanel editarNivelPanel, EditarObjetivoPanel objetivoPanel) {
+		
+		setObjetivo(obj);
+		setEditarNivelPanel(editarNivelPanel);
+		setObjetivoPanel(objetivoPanel);
+		setNivel(objetivoPanel.getNivel());
+		this.add(getObjetivoPanel());
+		
+	}
+	
 	public EditarNivelPanel getEditarNivelPanel() {
 		return editarNivelPanel;
 	}
