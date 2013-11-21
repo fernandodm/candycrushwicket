@@ -87,7 +87,7 @@ public class EditarNivelPanel extends Panel {
 							Nivel niv = EditarNivelPanel.this.mundoApp.getNivelEnConstruccion();
 							
 							EditarNivelPanel.this.objetivoPanel = new EditarGrandesExplosionesPanel("objetivoPanel", obj, EditarNivelPanel.this, niv);
-							EditarNivelPanel.this.editarGrandesExplosiones(obj);
+							EditarNivelPanel.this.editarObjetivo(obj);
 							
 						}else{
 			
@@ -95,7 +95,7 @@ public class EditarNivelPanel extends Panel {
 							Nivel niv = EditarNivelPanel.this.mundoApp.getNivelEnConstruccion();
 							
 							EditarNivelPanel.this.objetivoPanel = new EditarExplosionesPorColorPanel("objetivoPanel", obj, EditarNivelPanel.this, niv);
-							EditarNivelPanel.this.editarExplosionesPorColor(obj);
+							EditarNivelPanel.this.editarObjetivo(obj);
 							
 						}
 						
@@ -113,7 +113,7 @@ public class EditarNivelPanel extends Panel {
 			public void onSubmit() {
 				ExplosionesPorColor obj = new ExplosionesPorColor();
 				EditarNivelPanel.this.objetivoPanel = new EditarExplosionesPorColorPanel("objetivoPanel", obj, EditarNivelPanel.this, EditarNivelPanel.this.mundoApp.getNivelEnConstruccion());
-				EditarNivelPanel.this.agregarExplosionesPorColor(obj);
+				EditarNivelPanel.this.agregarObjetivo(obj);
 			}
 
 		});
@@ -123,7 +123,7 @@ public class EditarNivelPanel extends Panel {
 			public void onSubmit() {
 				GrandesExplosiones obj = new GrandesExplosiones();
 				EditarNivelPanel.this.objetivoPanel = new EditarGrandesExplosionesPanel("objetivoPanel", obj , EditarNivelPanel.this, EditarNivelPanel.this.mundoApp.getNivelEnConstruccion());
-				EditarNivelPanel.this.agregarGrandesExplosiones(obj);
+				EditarNivelPanel.this.agregarObjetivo(obj);
 			}
 
 		});
@@ -131,31 +131,16 @@ public class EditarNivelPanel extends Panel {
 	}
 
 	
-	protected void agregarGrandesExplosiones(GrandesExplosiones obj) {
+	protected void agregarObjetivo(Objetivo obj) {
 
-		AgregarGrandesExplosionesPage agregar = new AgregarGrandesExplosionesPage(obj, this, objetivoPanel);
+		AgregarObjetivoPage agregar = new AgregarObjetivoPage(obj, this, objetivoPanel);
 		objetivoPanel.setCommand(agregar);
 		this.setResponsePage(agregar);
 	}
-
-	protected void agregarExplosionesPorColor(ExplosionesPorColor obj) {
-
-		AgregarExplosionesPorColorPage agregar = new AgregarExplosionesPorColorPage(obj, this, objetivoPanel);
-		objetivoPanel.setCommand(agregar);
-		this.setResponsePage(agregar);
-	}
-
 	
-	protected void editarGrandesExplosiones(GrandesExplosiones obj) {
+	protected void editarObjetivo(Objetivo obj) {
 
-		EditarGrandesExplosionesPage agregar = new EditarGrandesExplosionesPage(obj, this, objetivoPanel);
-		objetivoPanel.setCommand(agregar);
-		this.setResponsePage(agregar);
-	}
-
-	protected void editarExplosionesPorColor(ExplosionesPorColor obj) {
-
-		EditarExplosionesPorColorPage agregar = new EditarExplosionesPorColorPage(obj, this, objetivoPanel);
+		EditarObjetivoPage agregar = new EditarObjetivoPage(obj, this, objetivoPanel);
 		objetivoPanel.setCommand(agregar);
 		this.setResponsePage(agregar);
 	}
