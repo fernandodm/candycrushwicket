@@ -11,6 +11,17 @@ public class EditarObjetivoPage extends WebPage  implements EdicionCreacionObjet
 	private Objetivo objetivo;
 	private EditarObjetivoPanel objetivoPanel;
 	private Nivel nivel;
+	
+	public EditarObjetivoPage(Objetivo obj,
+			EditarNivelPanel editarNivelPanel, EditarObjetivoPanel objetivoPanel) {
+		
+		setObjetivo(obj);
+		setEditarNivelPanel(editarNivelPanel);
+		setObjetivoPanel(objetivoPanel);
+		setNivel(objetivoPanel.getNivel());
+		this.add(getObjetivoPanel());
+		
+	}
 
 	public EditarNivelPanel getEditarNivelPanel() {
 		return editarNivelPanel;
