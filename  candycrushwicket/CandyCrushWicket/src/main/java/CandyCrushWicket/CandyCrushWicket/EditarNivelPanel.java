@@ -14,6 +14,8 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.validation.validator.NumberValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import Tp.CandyCrush.Dificultad;
 import Tp.CandyCrush.ExplosionesPorColor;
@@ -167,22 +169,22 @@ public class EditarNivelPanel extends Panel {
 		
 		final TextField<String> heightTextField = new TextField<String>("nivelEnConstruccion.tablero.alto");
 		heightTextField.setRequired(Boolean.TRUE);
-		//heightTextField.add(new PropertyValidator());
+		heightTextField.add(NumberValidator.minimum(3)); 
 		parent.add(heightTextField);
 		
 		final TextField<String> weightTextField = new TextField<String>("nivelEnConstruccion.tablero.ancho");
 		weightTextField.setRequired(Boolean.TRUE);
-		//weightTextField.add(new PropertyValidator());
+		weightTextField.add(NumberValidator.minimum(3));
 		parent.add(weightTextField);
 			
 		final TextField<String> movesTextField = new TextField<String>("nivelEnConstruccion.cantidadMovimientos");
 		movesTextField.setRequired(Boolean.TRUE);
-		//movesTextField.add(new PropertyValidator());
+		movesTextField.add(NumberValidator.minimum(1));
 		parent.add(movesTextField);
 		
 		final TextField<String> scoreTextField = new TextField<String>("nivelEnConstruccion.puntajeMinimo");
 		scoreTextField.setRequired(Boolean.TRUE);
-		//scoreTextField.add(new PropertyValidator());
+		scoreTextField.add(NumberValidator.minimum(1));
 		parent.add(scoreTextField);
 		
 		parent.add(new FeedbackPanel("feedbackPanel"));
