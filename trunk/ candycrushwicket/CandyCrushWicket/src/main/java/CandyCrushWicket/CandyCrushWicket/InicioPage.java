@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.model.CompoundPropertyModel;
 
+import Tp.CandyCrush.Mundo;
 import appModel.MundoAppModel;
 
 @SuppressWarnings("all")
@@ -19,7 +20,9 @@ public class InicioPage extends WebPage {
 	
 	public InicioPage() {
 	
+		
 		this.mundoApp = new MundoAppModel();
+		this.mundoApp.setMundo(new Mundo());
 		Form<MundoAppModel> loginForm = new Form<MundoAppModel>("mundoAppForm", new CompoundPropertyModel<MundoAppModel>(this.mundoApp));
 		this.agregarCampo(loginForm);
 		this.agregarAcciones(loginForm);
