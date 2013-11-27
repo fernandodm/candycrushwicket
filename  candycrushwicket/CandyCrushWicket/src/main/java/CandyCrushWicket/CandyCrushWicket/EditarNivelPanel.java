@@ -145,6 +145,14 @@ public class EditarNivelPanel extends Panel {
 		this.setResponsePage(agregar);
 	}
 
+
+	protected void editarExplosionesPorColor(ExplosionesPorColor obj) {
+		EditarObjetivoPage agregar = new EditarObjetivoPage(obj, this, objetivoPanel);
+		objetivoPanel.setCommand(agregar);
+		this.setResponsePage(agregar);
+	}
+
+
 	private void agregarCampos(Form<MundoAppModel> parent) {
 		
 		final DropDownChoice<Dificultad> dificultad = new DropDownChoice<Dificultad>(

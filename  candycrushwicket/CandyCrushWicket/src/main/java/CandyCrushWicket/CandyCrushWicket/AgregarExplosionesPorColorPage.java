@@ -4,7 +4,6 @@ import Tp.CandyCrush.ExplosionesPorColor;
 
 public class AgregarExplosionesPorColorPage extends AgregarObjetivoPage{
 	
-
 	public AgregarExplosionesPorColorPage(ExplosionesPorColor obj,
 			EditarNivelPanel editarNivelPanel, EditarObjetivoPanel objetivoPanel) {
 		

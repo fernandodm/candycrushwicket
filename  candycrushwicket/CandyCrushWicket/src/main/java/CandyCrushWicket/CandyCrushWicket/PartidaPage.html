@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Candy Crush</title>
+<link rel="stylesheet" type="text/css" href="css/cs_basic.css">
+</head>
+<body background="imagenes/fondoConfig.jpg">
+
+<h4>Comenzá a jugar! </h4>
+
+	<form wicket:id="partidaAppForm">
+		
+			<table>
+				<tr>
+					
+					<td align="left">PUNTAJE:</td>
+					<td align="right"wicket:id="partida.puntaje"></td>
+					
+				</tr>
+
+				<tr>
+					<td align="left">PUNTAJE MÍNIMO:</td>
+					<td align="right"wicket:id="puntajeMinimo"></td>
+
+				</tr>
+				
+				<tr>
+					<td align="left">MOVIMIENTOS RESTANTES:</td>
+					<td align="right"wicket:id="cantMovimientosFaltantes"></td>
+				</tr>
+
+
+			</table>
+			
+			<table>
+				<tr>
+					<td align="right">Fila:</td>
+					<td align="left"><input wicket:id="partida.coordenadaActual.fila"
+						type="text" /></td>
+				</tr>
+
+				<tr>
+					<td align="right">Columna:</td>
+					<td align="left"><input wicket:id="partida.coordenadaActual.columna"
+						type="text" /></td>
+				</tr>
+
+				<tr>
+					<td align="right">Mover:</td>
+					<td align="left"><select
+						wicket:id="partida.movimientoARealizar"
+						name="partidaApp.partida.movimientoARealizar">
+
+					</select></td>
+				</tr>
+				
+		</table>
+			<input type="submit" wicket:id="mover" value="Mover"
+					class="colorBoton" />
+			<input type="submit" wicket:id="ganar" value="Ganar"
+					class="colorBoton" />
+			<input type="submit" wicket:id="perder" value="Perder"
+					class="colorBoton" />
+		<div class="datagrid" style="margin-top: 30px">
+				<table>
+
+					<tbody>
+
+						<tr wicket:id="partida.nivelActual.tablero.filas" class="alt">
+							<td width="25%"><font size=3><font face="Lucida Console"><span wicket:id="contenido"></span></font></font></td>
+						</tr>
+
+					</tbody>
+				</table>			
+					</div>
+
+			<h4>Objetivos:</h4>
+			<div class="datagrid" style="margin-top: 30px">
+
+				<table>
+					<thead>
+						<tr>
+							<th width="50%">Objetivos</th>
+							<th width="8%">Estado</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr wicket:id="partida.nivelActual.objetivos" class="alt">
+							<td width="25%"><span wicket:id="descripcion"></span></td>
+							<td width="5%"><span wicket:id="seCumplioDescripcion"></span></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			
+
+			
+				
+	</form>
+
+</body>
+</html>

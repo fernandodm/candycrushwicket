@@ -13,6 +13,10 @@ public class AgregarObjetivoPage extends WebPage implements EdicionCreacionObjet
 	private EditarObjetivoPanel objetivoPanel;
 	private Nivel nivel;
 
+	public AgregarObjetivoPage(){
+		
+	}
+	
 	public AgregarObjetivoPage(Objetivo obj,
 			EditarNivelPanel editarNivelPanel, EditarObjetivoPanel objetivoPanel) {
 		

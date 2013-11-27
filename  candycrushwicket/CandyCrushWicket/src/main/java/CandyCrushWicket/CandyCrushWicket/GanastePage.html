@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>GANASTE!!</title>
+<link rel="stylesheet" type="text/css" href="css/cs_basic.css">
+</head>
+<body background="imagenes/fondoConfig.jpg">
+	
+	<form wicket:id="partidaAppForm">
+		
+			<table>
+				<tr>
+					<td align="right"wicket:id="resultado"></td>
+					<td align="left">Puntaje final:</td>
+					<td align="right"wicket:id="partida.puntaje"></td>
+					
+				</tr>
+			</table>
+
+
+			<h4>Progreso:</h4>
+			<div class="datagrid" style="margin-top: 30px">
+
+				<table>
+					<thead>
+						<tr>
+							<th width="50%">Nivel</th>
+							<th width="8%">Estado</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr wicket:id="partida.mundo.niveles" class="alt">
+							<td width="25%"><span wicket:id="nombre"></span></td>
+							<td width="5%"><span wicket:id="descripcionEstado"></span></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+					<input type="submit" wicket:id="ganar" value="Siguiente nivel"
+					class="colorBoton" />
+				
+	</form>
+
+</body>
+</html>
