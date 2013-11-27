@@ -41,12 +41,6 @@ public class MundoAppModel implements Serializable {
 		return nivelEnConstruccion;
 	}
 		
-	public void validarAlto(Integer unAlto) {
-		if (unAlto < 3) {
-			throw new UserException("Altura mínima: 3");
-		}
-	}
-	
 	public void setNivelEnConstruccion(Nivel nivelEnConstruccion) {
 		this.nivelEnConstruccion = nivelEnConstruccion;
 	}
@@ -79,7 +73,6 @@ public class MundoAppModel implements Serializable {
 	}
 	
 	public void agregarNivel(Nivel niv){
-		this.validarAlto(this.nivelEnConstruccion.getTablero().getAlto());
 		this.mundo.getNiveles().add(niv);
 	}
 	
