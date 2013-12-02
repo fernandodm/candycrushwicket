@@ -119,11 +119,11 @@ public class ConfigurarPage extends WebPage implements EdicionCreacionNivelComma
 				Partida partida = new Partida(mundoApp.getMundo());
 				
 				partida.setNivelActual(mundoApp.getMundo().getNiveles().get(0));
-				partida.setMovimientoARealizar(new Arriba());
+				partida.setCantMovimientosFaltantes(partida.getNivelActual().getCantidadMovimientos());
 				for(Nivel each : partida.getMundo().getNiveles()){
 					each.getTablero().iniciar();
 				}
-//				partida.getNivelActual().getTablero().iniciar();
+
 				PartidaPage partidaPage = new PartidaPage(new PartidaAppModel(partida));
 				this.setResponsePage(partidaPage);
 			}

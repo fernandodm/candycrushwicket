@@ -17,6 +17,7 @@ public class PerdistePage extends WebPage {
 	
 	private static final long serialVersionUID = 1L;
 	private PartidaAppModel partidaApp;
+	private Integer movs;
 	
 	public PartidaAppModel getPartidaApp() {
 		return partidaApp;
@@ -39,6 +40,7 @@ public class PerdistePage extends WebPage {
 		form.add(new Label("partida.puntaje"));
 		String nombre = partAM.getPartida().getNivelActual().getNombre();
 		form.add(new Label("resultado","Nivel " + nombre + " no superado..."));
+		
 		this.agregarGrillaNiveles(form);
 		this.agregarBotonIntentarDeNuevo(form);
 		this.add(form);
