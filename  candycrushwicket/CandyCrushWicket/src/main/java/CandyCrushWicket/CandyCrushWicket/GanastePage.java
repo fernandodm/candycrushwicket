@@ -62,7 +62,7 @@ public class GanastePage extends WebPage {
 		parent.add(new Button("ganar") {
 			@Override
 			public void onSubmit() {
-				Integer indice = GanastePage.this.getPartidaApp().getPartida().getMundo().getNiveles().indexOf(GanastePage.this.getPartidaApp().getPartida().getNivelActual());
+				Integer indice = GanastePage.this.getPartidaApp().obtenerNivelesDelMundo().indexOf(GanastePage.this.getPartidaApp().getPartida().getNivelActual());
 				Partida partida = new Partida(GanastePage.this.getPartidaApp().getPartida().getMundo());
 				partida.setNivelActual(partida.getMundo().getNiveles().get(indice + 1));
 				PartidaPage partidaPage = new PartidaPage(new PartidaAppModel(partida));

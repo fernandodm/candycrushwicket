@@ -62,7 +62,7 @@ public class PerdistePage extends WebPage {
 		parent.add(new Button("denuevo") {
 			@Override
 			public void onSubmit() {
-				Integer indice = PerdistePage.this.getPartidaApp().getPartida().getMundo().getNiveles().indexOf(PerdistePage.this.getPartidaApp().getPartida().getNivelActual());
+				Integer indice = PerdistePage.this.getPartidaApp().obtenerNivelesDelMundo().indexOf(PerdistePage.this.getPartidaApp().getPartida().getNivelActual());
 				Partida partida = new Partida(PerdistePage.this.getPartidaApp().getPartida().getMundo());
 				partida.setNivelActual(partida.getMundo().getNiveles().get(indice));
 				PartidaPage partidaPage = new PartidaPage(new PartidaAppModel(partida));
