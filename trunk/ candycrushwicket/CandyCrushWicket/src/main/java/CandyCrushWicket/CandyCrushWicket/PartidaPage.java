@@ -16,6 +16,8 @@ import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
+import excepciones.ExcepcionNoGeneroExplosion;
+
 import Tp.CandyCrush.Caramelo;
 import Tp.CandyCrush.Fila;
 import Tp.CandyCrush.Movimiento;
@@ -26,6 +28,7 @@ public class PartidaPage extends WebPage{
 	
 	private static final long serialVersionUID = 1L;
 	private PartidaAppModel partidaApp;
+	private Integer movimientos;
 	
 	public PartidaAppModel getPartidaApp() {
 		return partidaApp;
@@ -41,14 +44,13 @@ public class PartidaPage extends WebPage{
 	
 	public PartidaPage(PartidaAppModel partAM){
 		this.setPartidaApp(partAM);
-		
-//		this.add(new Label(partAM.getPartida().getNivelActual().getNombre()));
-		
+
 		Form<PartidaAppModel> form = new Form<PartidaAppModel>("partidaAppForm", new CompoundPropertyModel<PartidaAppModel>(partAM));
 		form.setOutputMarkupId(true);
 		form.add(new Label("partida.puntaje"));
 		form.add(new Label("puntajeMinimo", this.getPartidaApp().getPartida().getNivelActual().getPuntajeMinimo().toString()));
-		form.add(new Label("cantMovimientosFaltantes",this.getPartidaApp().getPartida().getNivelActual().getCantidadMovimientos().toString()));
+		form.add(new Label("partida.cantMovimientosFaltantes"));
+		this.movimientos = partAM.getPartida().getCantMovimientosFaltantes();
 		this.agregarCamposMovimiento(form);
 		this.agregarGrillaObjetivos(form);
 		this.agregarBotonMover(form);
@@ -101,8 +103,19 @@ public class PartidaPage extends WebPage{
 		parent.add(new AjaxButton("mover"){
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				Integer movs = PartidaPage.this.getPartidaApp().getPartida().getCantMovimientosFaltantes(); 
-				PartidaPage.this.getPartidaApp().getPartida().setCantMovimientosFaltantes(movs-1);
+				try {
+					
+					if((PartidaPage.this.getPartidaApp().getPartida().getCantMovimientosFaltantes() - 1) > 0){
+					PartidaPage.this.getPartidaApp().getPartida().getNivelActual().getTablero().moverCarameloSiEsValido(PartidaPage.this.getPartidaApp().getPartida().getCoordenadaActual(), PartidaPage.this.getPartidaApp().getPartida().getMovimientoARealizar());
+					PartidaPage.this.getPartidaApp().getPartida().setCantMovimientosFaltantes(PartidaPage.this.getPartidaApp().getPartida().getCantMovimientosFaltantes() - 1);
+					} else {
+						PartidaPage.this.getPartidaApp().getPartida().getNivelActual().setCantidadMovimientos(PartidaPage.this.movimientos);
+						PartidaPage.this.getPartidaApp().getPartida().setCantMovimientosFaltantes(PartidaPage.this.movimientos);
+						this.setResponsePage(new PerdistePage(PartidaPage.this.getPartidaApp()));
+					}
+				} catch (ExcepcionNoGeneroExplosion e) {
+					e.printStackTrace();
+				}
 				target.addComponent(form);
 			}
 		});
@@ -137,19 +150,6 @@ public class PartidaPage extends WebPage{
 		});
 	}
 	
-//	public ArrayList<ArrayList<Caramelo>> columnas(){
-//		Caramelo[][] caramelos = this.getPartidaApp().getPartida().getNivelActual().getTablero().getCaramelos();
-//		ArrayList<ArrayList<Caramelo>> carret = new ArrayList<ArrayList<Caramelo>>();
-//		for(int i = 0 ; i< caramelos[0].length ; i++){
-//			ArrayList<Caramelo> cars = new ArrayList<Caramelo>();
-//			for(int j = 0 ; j < caramelos.length ; j++){
-//				cars.add(caramelos[i][j]);
-//			}
-//			carret.add(cars);
-//		}
-//		return carret;
-//	}
-	
 	public void agregarTablero(Form<PartidaAppModel> parent){
 		
 		parent.add(new PropertyListView<Fila>("partida.nivelActual.tablero.filas") {
@@ -162,15 +162,5 @@ public class PartidaPage extends WebPage{
 		
 	}
 	
-//	public void crearCaramelosParaFila(final ListItem<Fila> itemFila){
-//	itemFila.add(new PropertyListView<Caramelo>("caramelos") {
-//	@Override
-//	protected void populateItem(final ListItem<Caramelo> item) {
-//			 item.add(new Label("color"));
-//		}
-//
-//	});
-//	
-//}
 	
 }
