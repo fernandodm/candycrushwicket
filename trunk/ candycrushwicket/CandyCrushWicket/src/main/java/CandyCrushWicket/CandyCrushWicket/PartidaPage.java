@@ -19,9 +19,12 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import excepciones.ExcepcionNoGeneroExplosion;
 
 import Tp.CandyCrush.Caramelo;
+import Tp.CandyCrush.Coordenada;
 import Tp.CandyCrush.Fila;
 import Tp.CandyCrush.Movimiento;
+import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
+import Tp.CandyCrush.Tablero;
 import appModel.PartidaAppModel;
 
 public class PartidaPage extends WebPage{
@@ -48,7 +51,7 @@ public class PartidaPage extends WebPage{
 		Form<PartidaAppModel> form = new Form<PartidaAppModel>("partidaAppForm", new CompoundPropertyModel<PartidaAppModel>(partAM));
 		form.setOutputMarkupId(true);
 		form.add(new Label("partida.puntaje"));
-		form.add(new Label("puntajeMinimo", this.getPartidaApp().getPartida().getNivelActual().getPuntajeMinimo().toString()));
+		form.add(new Label("puntajeMinimo", this.getPartidaApp().puntajeMinimoToString()));
 		form.add(new Label("partida.cantMovimientosFaltantes"));
 		this.movimientos = partAM.getPartida().getCantMovimientosFaltantes();
 		this.agregarCamposMovimiento(form);
@@ -105,12 +108,12 @@ public class PartidaPage extends WebPage{
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				try {
 					
-					if((PartidaPage.this.getPartidaApp().getPartida().getCantMovimientosFaltantes() - 1) > 0){
-					PartidaPage.this.getPartidaApp().getPartida().getNivelActual().getTablero().moverCarameloSiEsValido(PartidaPage.this.getPartidaApp().getPartida().getCoordenadaActual(), PartidaPage.this.getPartidaApp().getPartida().getMovimientoARealizar());
-					PartidaPage.this.getPartidaApp().getPartida().setCantMovimientosFaltantes(PartidaPage.this.getPartidaApp().getPartida().getCantMovimientosFaltantes() - 1);
+					if((PartidaPage.this.obtenerMovimientosFaltantes() - 1) > 0){
+					PartidaPage.this.obtenerTablero().moverCarameloSiEsValido(PartidaPage.this.coordenadaActual(), PartidaPage.this.obtenerMovimientoARealizar());
+					PartidaPage.this.setearCantidadDeMovimientosFaltantes(PartidaPage.this.obtenerMovimientosFaltantes() - 1);
 					} else {
-						PartidaPage.this.getPartidaApp().getPartida().getNivelActual().setCantidadMovimientos(PartidaPage.this.movimientos);
-						PartidaPage.this.getPartidaApp().getPartida().setCantMovimientosFaltantes(PartidaPage.this.movimientos);
+						PartidaPage.this.obtenerNivelActual().setCantidadMovimientos(PartidaPage.this.movimientos);
+						PartidaPage.this.setearCantidadDeMovimientosFaltantes(PartidaPage.this.movimientos);
 						this.setResponsePage(new PerdistePage(PartidaPage.this.getPartidaApp()));
 					}
 				} catch (ExcepcionNoGeneroExplosion e) {
@@ -121,14 +124,20 @@ public class PartidaPage extends WebPage{
 		});
 	}
 	
+	
+
+	protected Nivel obtenerNivelActual() {
+		return getPartidaApp().obtenerNivel();
+	}
+
 	private void agregarBotonGanar(Form<PartidaAppModel> parent){
 		parent.add(new Button("ganar"){
 			@Override
 			public void onSubmit(){
-				PartidaPage.this.getPartidaApp().getPartida().getNivelActual().setTermino(true);
+				PartidaPage.this.obtenerNivelActual().setTermino(true);
 				GanastePage partidaPage = new GanastePage(new PartidaAppModel(PartidaPage.this.getPartidaApp().getPartida()));
-				Integer in = PartidaPage.this.getPartidaApp().getPartida().getMundo().getNiveles().indexOf(PartidaPage.this.getPartidaApp().getPartida().getNivelActual());
-				if(in == PartidaPage.this.getPartidaApp().getPartida().getMundo().getNiveles().size() - 1){
+				Integer in = PartidaPage.this.obtenerNivelesDeLaPartida().indexOf(PartidaPage.this.obtenerNivelActual());
+				if(in == PartidaPage.this.obtenerNivelesDeLaPartida().size() - 1){
 					this.setResponsePage(new FinalPage(PartidaPage.this.getPartidaApp()));
 				} else {
 					this.setResponsePage(partidaPage);
@@ -138,11 +147,15 @@ public class PartidaPage extends WebPage{
 		});
 	}
 	
+	protected List<Nivel> obtenerNivelesDeLaPartida() {
+		return getPartidaApp().obtenerNivelesDelMundo();
+	}
+
 	private void agregarBotonPerder(Form<PartidaAppModel> parent){
 		parent.add(new Button("perder"){
 			@Override
 			public void onSubmit(){
-				PartidaPage.this.getPartidaApp().getPartida().getNivelActual().setTermino(false);
+				PartidaPage.this.obtenerNivelActual().setTermino(false);
 				PerdistePage perdistePage = new PerdistePage(new PartidaAppModel(PartidaPage.this.getPartidaApp().getPartida()));
 				this.setResponsePage(perdistePage);
 				
@@ -162,5 +175,26 @@ public class PartidaPage extends WebPage{
 		
 	}
 	
+	protected void setearCantidadDeMovimientosFaltantes(int i) {
+		getPartidaApp().setearALaPartidaLosMovimientos(i);		
+	}
+
+	protected Movimiento obtenerMovimientoARealizar() {
+		return getPartidaApp().movimientoARealizar();
+	}
+
+	protected Coordenada coordenadaActual() {
+		return getPartidaApp().ObtenerCoordenadaDeLaPartida();
+	}
+
+	protected Tablero obtenerTablero() {
+
+		return getPartidaApp().tableroDeLaPartida();
+	}
+
+	protected int obtenerMovimientosFaltantes() {
+		
+		return getPartidaApp().movimientosFaltantesDeLaPartida();
+	}
 	
 }
