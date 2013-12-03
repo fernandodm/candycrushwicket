@@ -2,6 +2,8 @@ package CandyCrushWicket.CandyCrushWicket;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.validation.validator.NumberValidator;
 
 import Tp.CandyCrush.ExplosionesPorColor;
 import Tp.CandyCrush.Nivel;
@@ -19,7 +21,12 @@ public class EditarExplosionesPorColorPanel extends EditarObjetivoPanel{
 	}
 	
 	public void agregarCampo(Form<ExplosionesPorColor> parent) {
-		parent.add(new TextField<String>("cantidad"));
-
+		
+		final TextField<String> cantidad = new TextField<String>("cantidad");
+		cantidad.setRequired(Boolean.TRUE);
+		cantidad.add(NumberValidator.minimum(1));
+		parent.add(cantidad);
+		
+		parent.add(new FeedbackPanel("feedbackPanel"));
 	}
 }
