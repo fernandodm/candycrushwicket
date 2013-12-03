@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -50,7 +51,12 @@ public class EditarObjetivoPanel extends Panel{
 	}
 
 	private void agregarCampos(Form<Objetivo> parent) {
-		parent.add(new DropDownChoice<String>("color", crearListaColores(), createColorChoiceRenderer() ));
+		
+		final DropDownChoice<String> color = new DropDownChoice<String>(
+				"color", crearListaColores(),
+				createColorChoiceRenderer());
+		color.setRequired(Boolean.TRUE);
+		parent.add(color);
 		
 	}
 
