@@ -6,8 +6,12 @@ import java.util.List;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.validation.validator.NumberValidator;
 
+import Tp.CandyCrush.Dificultad;
 import Tp.CandyCrush.GrandesExplosiones;
 import Tp.CandyCrush.Nivel;
 import Tp.CandyCrush.Objetivo;
@@ -23,8 +27,14 @@ public class EditarGrandesExplosionesPanel extends EditarObjetivoPanel{
 	}
 
 	private void agregarCampo(Form<GrandesExplosiones> parent) {
-		parent.add(new DropDownChoice<Integer>("cantidadGrandesExplosiones", crearListaCantidades(), createCantidadChoiceRenderer() ));
+	
+		final DropDownChoice<Integer> cantidad = new DropDownChoice<Integer>(
+				"cantidadGrandesExplosiones", crearListaCantidades(),
+				createCantidadChoiceRenderer());
+		cantidad.setRequired(Boolean.TRUE);
+		parent.add(cantidad);
 		
+		parent.add(new FeedbackPanel("feedbackPanel"));
 	}
 	
 	protected ChoiceRenderer<Integer> createCantidadChoiceRenderer() {
