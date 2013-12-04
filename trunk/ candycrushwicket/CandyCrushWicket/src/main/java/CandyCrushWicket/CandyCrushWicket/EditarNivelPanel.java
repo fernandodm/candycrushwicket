@@ -64,8 +64,8 @@ public class EditarNivelPanel extends Panel {
 	}
 
 	private void agregarGrillaObjetivos(Form<MundoAppModel> parent) {
-
-		parent.add(new PropertyListView<Objetivo>("nivelEnConstruccion.objetivos") {
+		
+		parent.add(new PropertyListView<Objetivo>("nivelEnConstruccion.objetivos"){
 			@Override
 			protected void populateItem(final ListItem<Objetivo> item) {
 				item.add(new Label("descripcion"));
@@ -187,6 +187,7 @@ public class EditarNivelPanel extends Panel {
 		scoreTextField.add(NumberValidator.minimum(1));
 		parent.add(scoreTextField);
 		
+		//parent.add(new FeedbackPanel("feedbackPanel").setEnabled(false));
 		parent.add(new FeedbackPanel("feedbackPanel"));
 	
 	}
