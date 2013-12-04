@@ -47,13 +47,13 @@ public class MundoAppModel implements Serializable {
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
-	
+			
 	public void validarNombreUsuario(String unNombre) {
 		if (unNombre.contains(" ")) {
 			throw new UserException("Ingrese un nombre de usuario válido sin dejar espacios");
 		}
 	}
-	
+
 	public void setNombreUsuario(String nombreUsuario) {
 		this.validarNombreUsuario(nombreUsuario);
 		this.nombreUsuario = nombreUsuario;
@@ -64,6 +64,7 @@ public class MundoAppModel implements Serializable {
 	public void setMundo(Mundo mundo) {
 		this.mundo = mundo;
 	}
+	
 	public void eliminarObjetivo(Objetivo objetivo) {
 		nivelEnConstruccion.eliminarObjetivo(objetivo);
 	}
@@ -124,6 +125,7 @@ public class MundoAppModel implements Serializable {
 	
 
 	public void agregarObjetivoAlNivel(Objetivo obj) {
+		
 		getNivelEnConstruccion().agregarObjetivo(obj);
 		
 	}
