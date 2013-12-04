@@ -13,7 +13,7 @@ import Tp.CandyCrush.Tablero;
 public class PartidaAppModel implements Serializable {
 	
 	private Partida partida;
-
+//
 	public PartidaAppModel(Partida partida) {
 		this.setPartida(partida);
 	}
