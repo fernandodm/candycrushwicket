@@ -1,5 +1,6 @@
 package CandyCrushWicket.CandyCrushWicket;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
@@ -7,6 +8,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
 import Tp.CandyCrush.Arriba;
@@ -105,8 +107,21 @@ public class ConfigurarPage extends WebPage implements EdicionCreacionNivelComma
 		parent.add(new Button("agregarNivel") {
 			@Override
 			public void onSubmit() {
-				ConfigurarPage.this.aceptarNivel(mundoApp.getNivelEnConstruccion());
-				mundoApp.setNivelEnConstruccion(new Nivel());
+				if(this.cantidadDeObjetivosCreados() > 0) {
+					ConfigurarPage.this.aceptarNivel(mundoApp.getNivelEnConstruccion());
+					mundoApp.setNivelEnConstruccion(new Nivel());
+				} else {
+					this.getFeedbackPanel().error("No hay objetivos creados");
+				}
+				
+			}
+
+			private int cantidadDeObjetivosCreados() {
+				return mundoApp.getNivelEnConstruccion().getObjetivos().size();
+			}
+
+			private FeedbackPanel getFeedbackPanel() {				
+				return ((FeedbackPanel) this.getMarkupAttributes().get("feedbackPanel"));
 			}
 
 		});
